@@ -22,10 +22,11 @@ router.post("/notes", (req, res) => {
         notes.push(newNote);
 
         fs.readFile("db/db.json", "utf-8", (err, data) => {
+            console.log("printing logs to test")
             console.log(data);
             const parsedRes = JSON.parse(data);
             parsedRes.push(newNote);
-            fs.writeFile("db/db.json", JSON.stringify(parsedRes), err => {
+            fs.writeFile("db/db.json", JSON.stringify(newNote), err => {
                 err ? console.error(err) : console.log("Success")
             })
         })
@@ -33,6 +34,7 @@ router.post("/notes", (req, res) => {
 });
 
  router.delete('/notes/:id', (req, res) => {
+   
     fs.readFile('db/db.json', 'utf8', (err, data) => {
         let notes = JSON.parse(data);
 
@@ -42,7 +44,7 @@ router.post("/notes", (req, res) => {
             if (err) {
                 console.log(err);
             } else {
-                console.log('Note deleted!');
+                console.log(`Note deleted!${notes}`);
                 res.json(notes);
             }
         });
