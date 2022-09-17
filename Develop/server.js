@@ -8,7 +8,7 @@ const getID = require("../helpers/generateID.js");
  // Initialize express app
 const app = express();
 
-const PORT = process.env.port;
+const PORT = process.env.port || 3001;
 app.use(express.static(path.join(__dirname, 'public')));
 // Middleware for parsing JSON and urlencoded form data
 app.use(express.json());
