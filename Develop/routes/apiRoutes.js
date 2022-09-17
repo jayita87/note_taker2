@@ -5,9 +5,11 @@ const router = require('express').Router();
 const notes = require('../db/db.json');
 
 router.get("/notes", (req, res) => {
- console.log(notes);
-    res.json(notes);
-});
+    fs.readFile('db/db.json', 'utf8', (err, data) => {
+      let notes = JSON.parse(data);
+      res.json(notes)
+    })
+  });
 
 router.post("/notes", (req, res) => {
     console.log(req.body)
